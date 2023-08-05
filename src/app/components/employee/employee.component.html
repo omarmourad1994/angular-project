@@ -1,0 +1,41 @@
+<div style="padding: 20px">
+  <h1>This is the header for that page</h1>
+  <button (click)="addEmployee()">Add new Employee</button>
+  <a style="float: right" routerLink="/about" routerLinkActive="active">About</a>
+  <div *ngFor="let employee of employees">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">{{ employee.name }}</h5>
+        <span class="card-age">{{ employee.age }} years old</span>
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ employee.address }}, {{ employee.country }}</p>
+        <div class="card-buttons">
+          <button class="btn btn-primary" (click)="editEmployee(employee)">Edit</button>
+          <button class="btn btn-danger" (click)="confirmDelete(employee)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirmation dialog -->
+<div *ngIf="showConfirmationDialog" class="modal-backdrop">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="close" (click)="hideConfirmationDialog()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete {{ employeeToBeDeleted?.name }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="hideConfirmationDialog()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteEmployee()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
